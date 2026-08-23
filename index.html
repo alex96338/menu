@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F4F2ED">
+<title>私廚 第二場 · 新北歐風</title>
+<style>
+  :root{
+    color-scheme:light;
+    --bone:#F4F2ED;
+    --paper:#FBFAF7;
+    --ink:#1F1E1C;
+    --ink-soft:#5A5751;
+    --line:#DCD8CF;
+    --berry:#6B2137;
+    --sage:#7C8471;
+    --gold:#A67C3D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    background:var(--bone);color:var(--ink);
+    font-family:"Iowan Old Style","Songti TC","Noto Serif TC",Georgia,serif;
+    line-height:1.8;padding:0 0 60px;-webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:0 24px}
+
+  header{padding:64px 0 34px;text-align:center}
+  .kicker{
+    font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:20px;font-family:system-ui,sans-serif;
+  }
+  h1{font-size:30px;font-weight:400;letter-spacing:.08em;line-height:1.4}
+  h1 em{display:block;font-style:normal;font-size:11.5px;letter-spacing:.3em;
+    color:var(--ink-soft);margin-top:14px;font-family:system-ui,sans-serif;text-transform:uppercase}
+
+  .intro{
+    text-align:center;font-size:14px;color:var(--ink-soft);
+    padding:0 0 40px;border-bottom:1px solid var(--line);
+  }
+
+  .hint{
+    text-align:center;font-family:system-ui,sans-serif;font-size:10.5px;
+    letter-spacing:.18em;color:var(--sage);padding:20px 0 2px;
+  }
+
+  .course{border-bottom:1px solid var(--line)}
+  .head{display:flex;align-items:flex-start;gap:16px;padding:26px 0;cursor:pointer}
+  .num{
+    font-family:system-ui,sans-serif;font-size:10.5px;letter-spacing:.2em;
+    color:var(--gold);padding-top:8px;min-width:22px;
+  }
+  .titles{flex:1}
+  .dish{font-size:18.5px;font-weight:400;line-height:1.6;letter-spacing:.02em}
+  .pair{
+    font-size:12.5px;color:var(--berry);margin-top:9px;
+    font-family:system-ui,sans-serif;letter-spacing:.03em;
+  }
+  .pair::before{content:"× ";opacity:.5}
+  .chev{color:var(--ink-soft);font-size:10px;padding-top:11px;
+    transition:transform .25s;font-family:system-ui,sans-serif}
+  .course.open .chev{transform:rotate(180deg)}
+
+  .body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .course.open .body{max-height:600px}
+  .inner{padding:0 0 28px 38px}
+  @media(max-width:520px){.inner{padding-left:0}}
+
+  .note{font-size:14px;color:var(--ink-soft);margin-bottom:9px}
+  .note:last-of-type{margin-bottom:18px}
+  .note strong{color:var(--ink);font-weight:400}
+
+  .items{display:flex;flex-wrap:wrap;gap:6px}
+  .items span{
+    font-family:system-ui,sans-serif;font-size:11.5px;color:var(--ink-soft);
+    border:1px solid var(--line);padding:3px 10px;border-radius:20px;background:var(--paper);
+  }
+
+  .arc{padding:42px 0 6px}
+  .arclbl{
+    font-family:system-ui,sans-serif;font-size:10px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--sage);margin-bottom:20px;text-align:center;
+  }
+  .arc svg{width:100%;height:auto;display:block}
+
+  footer{text-align:center;padding-top:40px}
+  footer p{font-size:10.5px;letter-spacing:.24em;color:var(--ink-soft);
+    font-family:system-ui,sans-serif;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Private Kitchen · No. 02</div>
+  <h1>新北歐風<em>New Nordic</em></h1>
+</header>
+
+<div class="intro">北歐料理的核心是保存。<br>三道菜,三種答案——咖啡是貫穿的主線。</div>
+
+<div class="hint">點擊展開</div>
+
+<article class="course" data-c>
+  <div class="head">
+    <div class="num">I</div>
+    <div class="titles">
+      <div class="dish">醃漬青蘋果、山羊乳酪<br>蒔蘿與黑麥脆片</div>
+      <div class="pair">極淺焙手沖 · 60°C 上桌</div>
+    </div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="body"><div class="inner">
+    <p class="note">盤上有<strong>兩種酸</strong>——山羊乳酪的乳酸是圓的,青蘋果的蘋果酸是尖的。</p>
+    <p class="note">中間用<strong>蜂蜜</strong>牽線:它圓掉羊乳酪的騷味,也接上咖啡的花香。</p>
+    <p class="note">建議先吃一口,再喝咖啡。</p>
+    <div class="items"><span>青蘋果</span><span>山羊乳酪</span><span>蒔蘿</span><span>黑麥脆片</span><span>蜂蜜</span></div>
+  </div></div>
+</article>
+
+<article class="course" data-c>
+  <div class="head">
+    <div class="num">II</div>
+    <div class="titles">
+      <div class="dish">Hasselback 馬鈴薯<br>佐褐奶油、榛果與優格</div>
+      <div class="pair">小豆蔻燕麥奶 Cortado</div>
+    </div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="body"><div class="inner">
+    <p class="note">一顆馬鈴薯切成一百片,只為了多出<strong>一百個酥脆的邊緣</strong>。名字來自斯德哥爾摩的 Hasselbacken 餐廳。</p>
+    <p class="note">焦化奶油的堅果味,和咖啡烘焙來自同一個反應。</p>
+    <div class="items"><span>馬鈴薯</span><span>焦化奶油</span><span>榛果</span><span>黑麥脆片</span><span>希臘優格</span></div>
+  </div></div>
+</article>
+
+<article class="course" data-c>
+  <div class="head">
+    <div class="num">III</div>
+    <div class="titles">
+      <div class="dish">嫩煎鴨胸<br>佐醋漬黑莓與杜松子</div>
+      <div class="pair">莓果氣泡咖啡 · 8°C</div>
+    </div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="body"><div class="inner">
+    <p class="note">黑莓在蘋果醋裡泡了兩天。杜松子是琴酒的來源,也是<strong>北歐野地的氣味</strong>。</p>
+    <p class="note">盤上與杯裡是同一種水果,兩種處理。</p>
+    <div class="items"><span>鴨胸</span><span>醋漬黑莓</span><span>杜松子</span><span>紅酒</span><span>百里香</span></div>
+  </div></div>
+</article>
+
+<section class="arc">
+  <div class="arclbl">全場結構</div>
+  <svg viewBox="0 0 480 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三道菜的語彙、酸度與溫度結構">
+    <g font-family="system-ui,-apple-system,sans-serif">
+
+      <line x1="165" y1="8" x2="165" y2="222" stroke="#DCD8CF" stroke-width="1" stroke-dasharray="2 5"/>
+      <line x1="315" y1="8" x2="315" y2="222" stroke="#DCD8CF" stroke-width="1" stroke-dasharray="2 5"/>
+
+      <text x="90"  y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">I</text>
+      <text x="240" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">II</text>
+      <text x="390" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">III</text>
+
+      <text x="90"  y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">保存</text>
+      <text x="240" y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">大地與火</text>
+      <text x="390" y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">森林</text>
+      <text x="90"  y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">醃漬 · 草本</text>
+      <text x="240" y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">焦烤 · 發酵</text>
+      <text x="390" y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">野味 · 果酸</text>
+
+      <text x="4" y="92" font-size="9" letter-spacing="2.5" fill="#7C8471">酸度</text>
+      <path d="M90,126 C140,134 190,144 240,142 C290,140 345,104 390,88"
+            fill="none" stroke="#6B2137" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="90"  cy="126" r="4" fill="#6B2137"/>
+      <circle cx="240" cy="142" r="4" fill="#6B2137"/>
+      <circle cx="390" cy="88"  r="4.5" fill="#6B2137"/>
+      <text x="90"  y="147" text-anchor="middle" font-size="10.5" fill="#8C5C6C">蘋果酸</text>
+      <text x="240" y="163" text-anchor="middle" font-size="10.5" fill="#9A8878">乳酸 · 輕</text>
+      <text x="390" y="74"  text-anchor="middle" font-size="10.5" fill="#6B2137">醋酸 · 重</text>
+
+      <text x="4" y="186" font-size="9" letter-spacing="2.5" fill="#7C8471">溫度</text>
+      <rect x="35"  y="192" width="110" height="30" rx="2" fill="#F0E3D6"/>
+      <rect x="185" y="192" width="110" height="30" rx="2" fill="#F0E3D6"/>
+      <rect x="335" y="192" width="110" height="30" rx="2" fill="#E4EAEE"/>
+      <text x="90"  y="212" text-anchor="middle" font-size="11.5" fill="#8A5626">熱 60°</text>
+      <text x="240" y="212" text-anchor="middle" font-size="11.5" fill="#8A5626">熱 60°</text>
+      <text x="390" y="212" text-anchor="middle" font-size="11.5" fill="#3B5567">冷 8°</text>
+
+    </g>
+  </svg>
+</section>
+
+<footer><p>Coffee is the through-line</p></footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('[data-c]').forEach(function(c){
+    c.querySelector('.head').addEventListener('click',function(){
+      c.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
