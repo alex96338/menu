@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F4F2ED">
-<title>私廚 第二場 · 新北歐風</title>
+<title>私廚 第三場 · 日式</title>
+<meta name="theme-color" content="#ECEDE7">
 <style>
   :root{
     color-scheme:light;
-    --bone:#F4F2ED;
-    --paper:#FBFAF7;
-    --ink:#1F1E1C;
-    --ink-soft:#5A5751;
-    --line:#DCD8CF;
-    --berry:#6B2137;
-    --sage:#7C8471;
-    --gold:#A67C3D;
+    --bone:#ECEDE7;
+    --paper:#F6F7F3;
+    --ink:#16211F;
+    --ink-soft:#4C5A56;
+    --line:#D2D6CD;
+    --indigo:#26486A;
+    --persim:#B4542C;
+    --sage:#7A8A80;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{
@@ -25,6 +25,9 @@
   }
   .wrap{max-width:560px;margin:0 auto;padding:0 24px}
 
+  :root[data-lang="en"] .zh{display:none}
+  :root:not([data-lang="en"]) .en{display:none}
+
   header{padding:64px 0 34px;text-align:center}
   .kicker{
     font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;
@@ -33,6 +36,16 @@
   h1{font-size:30px;font-weight:400;letter-spacing:.08em;line-height:1.4}
   h1 em{display:block;font-style:normal;font-size:11.5px;letter-spacing:.3em;
     color:var(--ink-soft);margin-top:14px;font-family:system-ui,sans-serif;text-transform:uppercase}
+
+  .lang{display:flex;justify-content:center;margin-top:24px}
+  .lang button{
+    font-family:system-ui,sans-serif;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;background:transparent;color:var(--ink-soft);
+    border:1px solid var(--line);padding:6px 14px;cursor:pointer;line-height:1;
+  }
+  .lang button:first-child{border-right:none}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+  .lang button:focus-visible{outline:1px solid var(--indigo);outline-offset:2px}
 
   .intro{
     text-align:center;font-size:14px;color:var(--ink-soft);
@@ -45,15 +58,17 @@
   }
 
   .course{border-bottom:1px solid var(--line)}
-  .head{display:flex;align-items:flex-start;gap:16px;padding:26px 0;cursor:pointer}
+  .head{display:flex;align-items:flex-start;gap:16px;padding:26px 0;cursor:pointer;width:100%;
+    background:transparent;border:0;text-align:left;font:inherit;color:inherit}
+  .head:focus-visible{outline:1px solid var(--indigo);outline-offset:3px}
   .num{
     font-family:system-ui,sans-serif;font-size:10.5px;letter-spacing:.2em;
-    color:var(--gold);padding-top:8px;min-width:22px;
+    color:var(--persim);padding-top:8px;min-width:22px;
   }
   .titles{flex:1}
   .dish{font-size:18.5px;font-weight:400;line-height:1.6;letter-spacing:.02em}
   .pair{
-    font-size:12.5px;color:var(--berry);margin-top:9px;
+    font-size:12.5px;color:var(--indigo);margin-top:9px;
     font-family:system-ui,sans-serif;letter-spacing:.03em;
   }
   .pair::before{content:"× ";opacity:.5}
@@ -61,19 +76,40 @@
     transition:transform .25s;font-family:system-ui,sans-serif}
   .course.open .chev{transform:rotate(180deg)}
 
-  .body{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .course.open .body{max-height:600px}
+  .body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .course.open .body{max-height:1000px}
   .inner{padding:0 0 28px 38px}
   @media(max-width:520px){.inner{padding-left:0}}
 
   .note{font-size:14px;color:var(--ink-soft);margin-bottom:9px}
-  .note:last-of-type{margin-bottom:18px}
   .note strong{color:var(--ink);font-weight:400}
+  .bean{
+    font-family:system-ui,sans-serif;font-size:11px;letter-spacing:.12em;
+    color:var(--sage);margin:16px 0 14px;text-transform:uppercase;
+  }
 
   .items{display:flex;flex-wrap:wrap;gap:6px}
   .items span{
     font-family:system-ui,sans-serif;font-size:11.5px;color:var(--ink-soft);
     border:1px solid var(--line);padding:3px 10px;border-radius:20px;background:var(--paper);
+  }
+
+  .guesslbl{
+    font-family:system-ui,sans-serif;font-size:10.5px;letter-spacing:.14em;
+    color:var(--persim);margin:20px 0 10px;display:flex;gap:10px;align-items:baseline;
+    flex-wrap:wrap;
+  }
+  .guesslbl .count{color:var(--sage);letter-spacing:.1em;margin-left:auto}
+  .chip{
+    font-family:system-ui,sans-serif;font-size:11.5px;line-height:1.5;
+    color:var(--sage);border:1px dashed var(--sage);padding:3px 10px;
+    border-radius:20px;background:transparent;cursor:pointer;
+    min-width:42px;transition:color .2s,border-color .2s,background .2s;
+  }
+  .chip:focus-visible{outline:1px solid var(--indigo);outline-offset:2px}
+  .chip.revealed{
+    color:var(--ink-soft);border-style:solid;border-color:var(--line);
+    background:var(--paper);cursor:default;
   }
 
   .arc{padding:42px 0 6px}
@@ -89,103 +125,231 @@
 </style>
 </head>
 <body>
+
 <div class="wrap">
 
 <header>
-  <div class="kicker">Private Kitchen · No. 02</div>
-  <h1>新北歐風<em>New Nordic</em></h1>
+  <div class="kicker">Private Kitchen · No. 03</div>
+  <h1><span class="zh">日式</span><span class="en">Japanese</span><em><span class="zh">Japanese</span><span class="en">日式</span></em></h1>
+  <div class="lang">
+    <button id="lang-zh" type="button" aria-pressed="true">中文</button>
+    <button id="lang-en" type="button" aria-pressed="false">English</button>
+  </div>
 </header>
 
-<div class="intro">北歐料理的核心是保存。<br>三道菜,三種答案——咖啡是貫穿的主線。</div>
+<div class="intro">
+  <span class="zh">三道菜，三杯咖啡。<br>餐點從冷到熱，咖啡從熱到冰。</span>
+  <span class="en">Three courses, three cups.<br>The plates run cold to hot, the coffee runs hot to iced.</span>
+</div>
 
-<div class="hint">點擊展開</div>
+<div class="hint"><span class="zh">點擊展開</span><span class="en">Tap to expand</span></div>
 
-<article class="course" data-c>
-  <div class="head">
+<article class="course" data-c="">
+  <button class="head" type="button" aria-expanded="false">
     <div class="num">I</div>
     <div class="titles">
-      <div class="dish">醃漬青蘋果、山羊乳酪<br>蒔蘿與黑麥脆片</div>
-      <div class="pair">極淺焙手沖 · 60°C 上桌</div>
+      <div class="dish">
+        <span class="zh">昆布締熟章魚<br>甘醋漬蓮藕與鹽昆布</span>
+        <span class="en">Kombu-cured octopus<br>with pickled lotus root &amp; shio-kombu</span>
+      </div>
+      <div class="pair">
+        <span class="zh">極淺焙手沖 · 兩顆濾杯對沖</span>
+        <span class="en">Pour-over · one coffee, two brewers</span>
+      </div>
     </div>
     <div class="chev">▾</div>
-  </div>
+  </button>
   <div class="body"><div class="inner">
-    <p class="note">盤上有<strong>兩種酸</strong>——山羊乳酪的乳酸是圓的,青蘋果的蘋果酸是尖的。</p>
-    <p class="note">中間用<strong>蜂蜜</strong>牽線:它圓掉羊乳酪的騷味,也接上咖啡的花香。</p>
-    <p class="note">建議先吃一口,再喝咖啡。</p>
-    <div class="items"><span>青蘋果</span><span>山羊乳酪</span><span>蒔蘿</span><span>黑麥脆片</span><span>蜂蜜</span></div>
+    <p class="note">
+      <span class="zh">章魚撒鹽脫水，夾進<strong>昆布</strong>裡冷藏一夜。旨味滲進去，看不見但嚐得到。</span>
+      <span class="en">The octopus is salted to draw out water, then pressed between sheets of <strong>kombu</strong> overnight. The savour moves in. You can’t see it, but you can taste it.</span>
+    </p>
+    <p class="note">
+      <span class="zh">盤上的鹽昆布和藏在裡面的是<strong>同一種海帶</strong>，一個看得見，一個看不見。</span>
+      <span class="en">The shio-kombu on the plate and the sheets inside the octopus are <strong>the same seaweed</strong>, one you see and one you don’t.</span>
+    </p>
+    <p class="note">
+      <span class="zh">兩杯是同一支豆，用不同濾杯沖。</span>
+      <span class="en">Two cups, the same coffee, two different brewers.</span>
+    </p>
+    <p class="bean">Aviary 029</p>
+    <div class="items">
+      <span class="zh">熟章魚</span><span class="en">Octopus</span>
+      <span class="zh">真昆布</span><span class="en">Kombu</span>
+      <span class="zh">蓮藕</span><span class="en">Lotus root</span>
+      <span class="zh">甘醋</span><span class="en">Sweet vinegar</span>
+      <span class="zh">鹽昆布</span><span class="en">Shio-kombu</span>
+    </div>
   </div></div>
 </article>
 
-<article class="course" data-c>
-  <div class="head">
+<article class="course" data-c="">
+  <button class="head" type="button" aria-expanded="false">
     <div class="num">II</div>
     <div class="titles">
-      <div class="dish">Hasselback 馬鈴薯<br>佐褐奶油、榛果與優格</div>
-      <div class="pair">小豆蔻燕麥奶 Cortado</div>
+      <div class="dish">
+        <span class="zh">昭和蛋三明治<br>與草莓鮮奶油三明治</span>
+        <span class="en">Shōwa egg sandwich<br>&amp; strawberry cream sandwich</span>
+      </div>
+      <div class="pair">
+        <span class="zh">維也納咖啡 · 冷萃 · 8°C</span>
+        <span class="en">Iced Vienna · cold brew · 8°C</span>
+      </div>
     </div>
     <div class="chev">▾</div>
-  </div>
+  </button>
   <div class="body"><div class="inner">
-    <p class="note">一顆馬鈴薯切成一百片,只為了多出<strong>一百個酥脆的邊緣</strong>。名字來自斯德哥爾摩的 Hasselbacken 餐廳。</p>
-    <p class="note">焦化奶油的堅果味,和咖啡烘焙來自同一個反應。</p>
-    <div class="items"><span>馬鈴薯</span><span>焦化奶油</span><span>榛果</span><span>黑麥脆片</span><span>希臘優格</span></div>
+    <p class="note">
+      <span class="zh">蛋白切丁，蛋黃壓泥，<strong>分開處理再拌回去</strong>。一起壓就變成糊了。</span>
+      <span class="en">Whites diced, yolks mashed, <strong>handled separately and folded back together</strong>. Mash them as one and you get paste.</span>
+    </p>
+    <p class="note">
+      <span class="zh">微甜，尾韻有一點黃芥末。那個甜是<strong>昭和年代</strong>的記號。</span>
+      <span class="en">Faintly sweet, with a trace of Japanese mustard in the finish. That sweetness is the <strong>Shōwa-era</strong> signature.</span>
+    </p>
+    <p class="note">
+      <span class="zh">鮮奶油浮在咖啡上，<strong>不要攪</strong>。糖在奶油裡，不在咖啡裡。</span>
+      <span class="en">The cream floats on the coffee. <strong>Don’t stir.</strong> The sugar is in the cream, never in the coffee.</span>
+    </p>
+    <p class="bean">Duber Mejia · El Diamante, Colombia</p>
+    <div class="items">
+      <span class="zh">雞蛋</span><span class="en">Egg</span>
+      <span class="zh">日式美乃滋</span><span class="en">Kewpie</span>
+      <span class="zh">黃芥末</span><span class="en">Mustard</span>
+      <span class="zh">草莓</span><span class="en">Strawberry</span>
+      <span class="zh">打發鮮奶油</span><span class="en">Whipped cream</span>
+    </div>
   </div></div>
 </article>
 
-<article class="course" data-c>
-  <div class="head">
+<article class="course" data-c="">
+  <button class="head" type="button" aria-expanded="false">
     <div class="num">III</div>
     <div class="titles">
-      <div class="dish">嫩煎鴨胸<br>佐醋漬黑莓與杜松子</div>
-      <div class="pair">莓果氣泡咖啡 · 8°C</div>
+      <div class="dish">
+        <span class="zh">李氏咖哩<br>佐煎雞腿與白飯</span>
+        <span class="en">Lee’s curry<br>with seared chicken thigh &amp; rice</span>
+      </div>
+      <div class="pair">
+        <span class="zh">綠茶柚子氣泡咖啡 · 8°C</span>
+        <span class="en">Yuzu green tea coffee soda · 8°C</span>
+      </div>
     </div>
     <div class="chev">▾</div>
-  </div>
+  </button>
   <div class="body"><div class="inner">
-    <p class="note">黑莓在蘋果醋裡泡了兩天。杜松子是琴酒的來源,也是<strong>北歐野地的氣味</strong>。</p>
-    <p class="note">盤上與杯裡是同一種水果,兩種處理。</p>
-    <div class="items"><span>鴨胸</span><span>醋漬黑莓</span><span>杜松子</span><span>紅酒</span><span>百里香</span></div>
+    <p class="note">
+      <span class="zh">全部材料磨成泥，小火炒一小時<strong>全程不上色</strong>。沒有番茄，沒有牛肉。</span>
+      <span class="en">Everything is grated to a purée and cooked down for an hour, <strong>never allowed to colour</strong>. No tomato, no beef.</span>
+    </p>
+    <p class="note">
+      <span class="zh">致敬台北 NOBUO 李信男主廚的招牌咖哩。</span>
+      <span class="en">An homage to the signature curry of chef Nobu Lee, NOBUO, Taipei.</span>
+    </p>
+    <p class="bean">Chorso Bule · Ethiopia</p>
+
+    <p class="guesslbl">
+      <span class="zh">猜猜看裡面有什麼，點一下翻開</span>
+      <span class="en">Guess what’s inside, tap to reveal</span>
+      <span class="count" id="gcount">0 / 8</span>
+    </p>
+    <div class="items">
+      <button class="chip" type="button" data-zh="紅蘿蔔" data-en="Carrot"></button>
+      <button class="chip" type="button" data-zh="洋蔥" data-en="Onion"></button>
+      <button class="chip" type="button" data-zh="青蘋果" data-en="Green apple"></button>
+      <button class="chip" type="button" data-zh="和梨" data-en="Nashi pear"></button>
+      <button class="chip" type="button" data-zh="奇異果" data-en="Kiwi"></button>
+      <button class="chip" type="button" data-zh="薑" data-en="Ginger"></button>
+      <button class="chip" type="button" data-zh="蜂蜜" data-en="Honey"></button>
+      <button class="chip" type="button" data-zh="濃縮咖啡" data-en="Espresso"></button>
+    </div>
   </div></div>
 </article>
 
 <section class="arc">
-  <div class="arclbl">全場結構</div>
-  <svg viewBox="0 0 480 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三道菜的語彙、酸度與溫度結構">
+  <div class="arclbl"><span class="zh">全場結構</span><span class="en">The arc</span></div>
+
+  <svg class="zh" viewBox="0 0 480 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三道菜的語彙、質地與溫度結構">
     <g font-family="system-ui,-apple-system,sans-serif">
+      <line x1="165" y1="8" x2="165" y2="222" stroke="#D2D6CD" stroke-width="1" stroke-dasharray="2 5"></line>
+      <line x1="315" y1="8" x2="315" y2="222" stroke="#D2D6CD" stroke-width="1" stroke-dasharray="2 5"></line>
 
-      <line x1="165" y1="8" x2="165" y2="222" stroke="#DCD8CF" stroke-width="1" stroke-dasharray="2 5"/>
-      <line x1="315" y1="8" x2="315" y2="222" stroke="#DCD8CF" stroke-width="1" stroke-dasharray="2 5"/>
+      <text x="90" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">I</text>
+      <text x="240" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">II</text>
+      <text x="390" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">III</text>
 
-      <text x="90"  y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">I</text>
-      <text x="240" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">II</text>
-      <text x="390" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#A67C3D">III</text>
+      <text x="90" y="46" text-anchor="middle" font-size="13.5" fill="#16211F">旨味</text>
+      <text x="240" y="46" text-anchor="middle" font-size="13.5" fill="#16211F">乳脂</text>
+      <text x="390" y="46" text-anchor="middle" font-size="13.5" fill="#16211F">果甜</text>
+      <text x="90" y="62" text-anchor="middle" font-size="9.5" fill="#7A8A80">鹽 · 海藻</text>
+      <text x="240" y="62" text-anchor="middle" font-size="9.5" fill="#7A8A80">蛋 · 鮮奶油</text>
+      <text x="390" y="62" text-anchor="middle" font-size="9.5" fill="#7A8A80">香料 · 果泥</text>
 
-      <text x="90"  y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">保存</text>
-      <text x="240" y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">大地與火</text>
-      <text x="390" y="46" text-anchor="middle" font-size="13.5" fill="#1F1E1C">森林</text>
-      <text x="90"  y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">醃漬 · 草本</text>
-      <text x="240" y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">焦烤 · 發酵</text>
-      <text x="390" y="62" text-anchor="middle" font-size="9.5" fill="#7C8471">野味 · 果酸</text>
+      <text x="4" y="106" font-size="9" letter-spacing="2.5" fill="#7A8A80">質地</text>
+      <text x="90" y="108" text-anchor="middle" font-size="16" fill="#26486A">脆</text>
+      <text x="240" y="108" text-anchor="middle" font-size="16" fill="#26486A">綿</text>
+      <text x="390" y="108" text-anchor="middle" font-size="16" fill="#26486A">稠</text>
+      <text x="90" y="126" text-anchor="middle" font-size="9.5" fill="#7A8A80">三種咬感</text>
+      <text x="240" y="126" text-anchor="middle" font-size="9.5" fill="#7A8A80">軟而綿</text>
+      <text x="390" y="126" text-anchor="middle" font-size="9.5" fill="#7A8A80">濃稠包覆</text>
 
-      <text x="4" y="92" font-size="9" letter-spacing="2.5" fill="#7C8471">酸度</text>
-      <path d="M90,126 C140,134 190,144 240,142 C290,140 345,104 390,88"
-            fill="none" stroke="#6B2137" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="90"  cy="126" r="4" fill="#6B2137"/>
-      <circle cx="240" cy="142" r="4" fill="#6B2137"/>
-      <circle cx="390" cy="88"  r="4.5" fill="#6B2137"/>
-      <text x="90"  y="147" text-anchor="middle" font-size="10.5" fill="#8C5C6C">蘋果酸</text>
-      <text x="240" y="163" text-anchor="middle" font-size="10.5" fill="#9A8878">乳酸 · 輕</text>
-      <text x="390" y="74"  text-anchor="middle" font-size="10.5" fill="#6B2137">醋酸 · 重</text>
+      <text x="4" y="180" font-size="9" letter-spacing="2.5" fill="#7A8A80">餐點</text>
+      <rect x="52" y="162" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <rect x="189" y="162" width="102" height="26" rx="2" fill="#E8E9E2"></rect>
+      <rect x="339" y="162" width="102" height="26" rx="2" fill="#F2E2D9"></rect>
+      <text x="103" y="180" text-anchor="middle" font-size="11.5" fill="#26486A">冷</text>
+      <text x="240" y="180" text-anchor="middle" font-size="11.5" fill="#4C5A56">常溫</text>
+      <text x="390" y="180" text-anchor="middle" font-size="11.5" fill="#A04A22">熱</text>
 
-      <text x="4" y="186" font-size="9" letter-spacing="2.5" fill="#7C8471">溫度</text>
-      <rect x="35"  y="192" width="110" height="30" rx="2" fill="#F0E3D6"/>
-      <rect x="185" y="192" width="110" height="30" rx="2" fill="#F0E3D6"/>
-      <rect x="335" y="192" width="110" height="30" rx="2" fill="#E4EAEE"/>
-      <text x="90"  y="212" text-anchor="middle" font-size="11.5" fill="#8A5626">熱 60°</text>
-      <text x="240" y="212" text-anchor="middle" font-size="11.5" fill="#8A5626">熱 60°</text>
-      <text x="390" y="212" text-anchor="middle" font-size="11.5" fill="#3B5567">冷 8°</text>
+      <text x="4" y="212" font-size="9" letter-spacing="2.5" fill="#7A8A80">咖啡</text>
+      <rect x="52" y="194" width="102" height="26" rx="2" fill="#F2E2D9"></rect>
+      <rect x="189" y="194" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <rect x="339" y="194" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <text x="103" y="212" text-anchor="middle" font-size="11.5" fill="#A04A22">熱 60°</text>
+      <text x="240" y="212" text-anchor="middle" font-size="11.5" fill="#26486A">冰 8°</text>
+      <text x="390" y="212" text-anchor="middle" font-size="11.5" fill="#26486A">冰 8°</text>
+    </g>
+  </svg>
 
+  <svg class="en" viewBox="0 0 480 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vocabulary, texture and temperature across the three courses">
+    <g font-family="system-ui,-apple-system,sans-serif">
+      <line x1="165" y1="8" x2="165" y2="222" stroke="#D2D6CD" stroke-width="1" stroke-dasharray="2 5"></line>
+      <line x1="315" y1="8" x2="315" y2="222" stroke="#D2D6CD" stroke-width="1" stroke-dasharray="2 5"></line>
+
+      <text x="90" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">I</text>
+      <text x="240" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">II</text>
+      <text x="390" y="20" text-anchor="middle" font-size="10.5" letter-spacing="2" fill="#B4542C">III</text>
+
+      <text x="90" y="46" text-anchor="middle" font-size="12.5" fill="#16211F">Umami</text>
+      <text x="240" y="46" text-anchor="middle" font-size="12.5" fill="#16211F">Butterfat</text>
+      <text x="390" y="46" text-anchor="middle" font-size="12.5" fill="#16211F">Fruit</text>
+      <text x="90" y="62" text-anchor="middle" font-size="9" fill="#7A8A80">salt · seaweed</text>
+      <text x="240" y="62" text-anchor="middle" font-size="9" fill="#7A8A80">egg · cream</text>
+      <text x="390" y="62" text-anchor="middle" font-size="9" fill="#7A8A80">spice · purée</text>
+
+      <text x="4" y="106" font-size="8.5" letter-spacing="1.5" fill="#7A8A80">BITE</text>
+      <text x="90" y="108" text-anchor="middle" font-size="14" fill="#26486A">Crisp</text>
+      <text x="240" y="108" text-anchor="middle" font-size="14" fill="#26486A">Soft</text>
+      <text x="390" y="108" text-anchor="middle" font-size="14" fill="#26486A">Thick</text>
+      <text x="90" y="126" text-anchor="middle" font-size="9" fill="#7A8A80">three textures</text>
+      <text x="240" y="126" text-anchor="middle" font-size="9" fill="#7A8A80">yielding</text>
+      <text x="390" y="126" text-anchor="middle" font-size="9" fill="#7A8A80">coating</text>
+
+      <text x="4" y="180" font-size="8.5" letter-spacing="1.5" fill="#7A8A80">PLATE</text>
+      <rect x="52" y="162" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <rect x="189" y="162" width="102" height="26" rx="2" fill="#E8E9E2"></rect>
+      <rect x="339" y="162" width="102" height="26" rx="2" fill="#F2E2D9"></rect>
+      <text x="103" y="180" text-anchor="middle" font-size="11" fill="#26486A">cold</text>
+      <text x="240" y="180" text-anchor="middle" font-size="11" fill="#4C5A56">room</text>
+      <text x="390" y="180" text-anchor="middle" font-size="11" fill="#A04A22">hot</text>
+
+      <text x="4" y="212" font-size="8.5" letter-spacing="1.5" fill="#7A8A80">CUP</text>
+      <rect x="52" y="194" width="102" height="26" rx="2" fill="#F2E2D9"></rect>
+      <rect x="189" y="194" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <rect x="339" y="194" width="102" height="26" rx="2" fill="#DFE7EE"></rect>
+      <text x="103" y="212" text-anchor="middle" font-size="11" fill="#A04A22">hot 60°</text>
+      <text x="240" y="212" text-anchor="middle" font-size="11" fill="#26486A">iced 8°</text>
+      <text x="390" y="212" text-anchor="middle" font-size="11" fill="#26486A">iced 8°</text>
     </g>
   </svg>
 </section>
@@ -195,11 +359,58 @@
 </div>
 
 <script>
-  document.querySelectorAll('[data-c]').forEach(function(c){
-    c.querySelector('.head').addEventListener('click',function(){
-      c.classList.toggle('open');
+  document.querySelectorAll('[data-c]').forEach(function (c) {
+    var head = c.querySelector('.head');
+    head.addEventListener('click', function () {
+      var open = c.classList.toggle('open');
+      head.setAttribute('aria-expanded', String(open));
     });
   });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var gcount = document.getElementById('gcount');
+
+  function paintChips() {
+    var en = document.documentElement.getAttribute('data-lang') === 'en';
+    var n = 0;
+    chips.forEach(function (ch) {
+      if (ch.classList.contains('revealed')) {
+        ch.textContent = ch.getAttribute(en ? 'data-en' : 'data-zh');
+        n++;
+      } else {
+        ch.textContent = en ? '?' : '？';
+      }
+    });
+    if (gcount) gcount.textContent = n + ' / ' + chips.length;
+  }
+
+  chips.forEach(function (ch) {
+    ch.addEventListener('click', function (e) {
+      e.stopPropagation();
+      ch.classList.add('revealed');
+      paintChips();
+    });
+  });
+
+  (function () {
+    var root = document.documentElement;
+    var bZh = document.getElementById('lang-zh');
+    var bEn = document.getElementById('lang-en');
+    function apply(lang) {
+      root.setAttribute('data-lang', lang);
+      var isEn = lang === 'en';
+      bEn.setAttribute('aria-pressed', String(isEn));
+      bZh.setAttribute('aria-pressed', String(!isEn));
+      paintChips();
+      try { localStorage.setItem('cpc-menu3-lang', lang); } catch (e) {}
+    }
+    var saved = 'zh';
+    try { saved = localStorage.getItem('cpc-menu3-lang') || 'zh'; } catch (e) {}
+    apply(saved === 'en' ? 'en' : 'zh');
+    bZh.addEventListener('click', function () { apply('zh'); });
+    bEn.addEventListener('click', function () { apply('en'); });
+  })();
 </script>
+
 </body>
 </html>
